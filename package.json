@@ -13,7 +13,15 @@
   },
   "babel": {
     "presets": [
-      "sharyn"
+      "sharyn",
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "node": "current"
+          }
+        }
+      ]
     ]
   },
   "eslintConfig": {

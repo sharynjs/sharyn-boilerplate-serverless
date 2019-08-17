@@ -23,17 +23,18 @@ functions:
           method: any
           cors: true
 
+  get-notes:
+    handler: src/functions/ssr.getNotes
+    events:
+      - http:
+          path: ''
+          method: get
+          cors: true
+
   get-note:
     handler: src/functions/ssr.getNote
     events:
       - http:
           path: note/{id}
-          method: get
-          cors: true
-
-  get-notes:
-    handler: src/functions/ssr.getNotes
-    events:
-      - http:
           method: get
           cors: true
