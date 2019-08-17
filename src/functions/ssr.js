@@ -1,5 +1,8 @@
 // @flow
 
+import 'core-js/stable'
+import 'regenerator-runtime/runtime'
+
 import middy from 'middy'
 import { cors } from 'middy/middlewares'
 
