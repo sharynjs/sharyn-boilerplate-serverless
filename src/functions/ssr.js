@@ -2,14 +2,26 @@
 
 import middy from 'middy'
 import { cors } from 'middy/middlewares'
+
 import { getNotesCall, getNoteCall } from 'note/note-calls'
+import NotesPage from 'note/cmp-page/NotesPage'
+import NotePage from 'note/cmp-page/NotePage'
 
-export const getNote = middy(async () => {
-  const resp = await getNoteCall()
-  return { statusCode: 200, body: JSON.stringify(resp.data.data) }
-}).use(cors())
+const createHtml = (body: string) => `<!doctype html>
+<html>
+  <head></head>
+  <body>${body}</body>
+</html>
+`
 
-export const getNotes = middy(async () => {
-  const resp = await getNotesCall()
-  return { statusCode: 200, body: JSON.stringify(resp.data.data) }
-}).use(cors())
+export const getNote = middy(async ({ pathParameters }) => ({
+  statusCode: 200,
+  headers: { 'content-type': 'text/html' },
+  body: createHtml(NotePage(await getNoteCall(pathParameters.id))),
+})).use(cors())
+
+export const getNotes = middy(async () => ({
+  statusCode: 200,
+  headers: { 'content-type': 'text/html' },
+  body: createHtml(NotesPage(await getNotesCall())),
+})).use(cors())
