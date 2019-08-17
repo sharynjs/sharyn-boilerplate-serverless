@@ -10,7 +10,19 @@ plugins:
   - serverless-offline
   - serverless-webpack
 
+custom:
+  webpack:
+    config: webpack.functions.config.js
+
 functions:
+  graphql:
+    handler: src/functions/graphql.main
+    events:
+      - http:
+          path: graphql
+          method: any
+          cors: true
+
   hello:
     handler: src/functions/hello.main
     events:

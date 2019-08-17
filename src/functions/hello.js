@@ -1,15 +1,8 @@
 // @flow
 
-export const main = (event, context, callback) => {
-  console.log('hello')
+import middy from 'middy'
+import { cors } from 'middy/middlewares'
 
-  const response = {
-    statusCode: 200,
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Credentials': true,
-    },
-    body: 'ok',
-  }
-  callback(null, response)
-}
+export const main = middy(async () => {
+  return { statusCode: 200, body: 'ok' }
+}).use(cors())
