@@ -2,7 +2,7 @@
 
 import axios from 'axios'
 
-import { getNotesQuery, getNoteQuery } from 'note/note-graphql'
+import { getNotesQuery, getNoteQuery } from 'note/note-queries'
 
 const graphqlCall = ({ params, data, ...rest }: { params?: Object, data?: Object }) =>
   axios({
