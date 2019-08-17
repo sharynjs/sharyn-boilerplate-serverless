@@ -1,0 +1,67 @@
+{
+  "name": "sharyn-boilerplate-base",
+  "private": true,
+  "scripts": {
+    "start": "run-p dev:*",
+    "prod": "run-s clean prod:*",
+    "dev:server": "http-server dist -p 8000",
+    "dev:wds": "webpack-dev-server --hot",
+    "prod:build": "webpack --mode production",
+    "prod:server": "http-server dist -p $PORT",
+    "lint": "eslint src && flow",
+    "clean": "rimraf dist/bundle.js"
+  },
+  "babel": {
+    "presets": [
+      "sharyn"
+    ]
+  },
+  "eslintConfig": {
+    "extends": "sharyn"
+  },
+  "prettier": "@sharyn/prettier",
+  "dependencies": {
+    "@sharyn/util": "2.5.0",
+    "http-server": "^0.11.1",
+    "lodash": "4.17.15",
+    "react": "16.8.6",
+    "react-dom": "16.8.6",
+    "react-hot-loader": "4.12.8"
+  },
+  "devDependencies": {
+    "@babel/core": "7.5.5",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "7.4.4",
+    "@babel/plugin-proposal-optional-catch-binding": "7.2.0",
+    "@babel/plugin-proposal-optional-chaining": "7.2.0",
+    "@babel/preset-env": "7.5.5",
+    "@babel/preset-flow": "7.0.0",
+    "@babel/preset-react": "7.0.0",
+    "@sharyn/prettier": "1.0.1",
+    "babel-eslint": "10.0.2",
+    "babel-loader": "8.0.6",
+    "babel-plugin-flow-react-proptypes": "25.1.0",
+    "babel-plugin-module-resolver": "3.2.0",
+    "babel-preset-sharyn": "4.0.1",
+    "eslint": "6.0.1",
+    "eslint-config-airbnb": "17.1.1",
+    "eslint-config-prettier": "6.0.0",
+    "eslint-config-sharyn": "4.0.1",
+    "eslint-import-resolver-babel-module": "5.1.0",
+    "eslint-plugin-flowtype": "3.12.1",
+    "eslint-plugin-import": "2.18.1",
+    "eslint-plugin-jsx-a11y": "6.2.3",
+    "eslint-plugin-prettier": "3.1.0",
+    "eslint-plugin-react": "7.14.2",
+    "flow-bin": "0.103.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "1.18.2",
+    "rimraf": "^2.6.3",
+    "serverless": "1.50.0",
+    "serverless-offline": "5.10.1",
+    "serverless-webpack": "^5.3.1",
+    "webpack": "4.36.1",
+    "webpack-cli": "3.3.6",
+    "webpack-dev-server": "3.7.2",
+    "yarn-or-npm": "^2.0.4"
+  }
+}

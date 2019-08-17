@@ -1,0 +1,20 @@
+org: verekia
+app: sharyn-boilerplate-serverless
+service: sharyn-boilerplate-serverless
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+
+plugins:
+  - serverless-offline
+  - serverless-webpack
+
+functions:
+  hello:
+    handler: src/functions/hello.main
+    events:
+      - http:
+          path: hello
+          method: get
+          cors: true
