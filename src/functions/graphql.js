@@ -2,45 +2,10 @@
 
 import 'dotenv/config'
 
-import { ApolloServer, gql } from 'apollo-server-lambda'
-import Knex from 'knex'
+import { ApolloServer } from 'apollo-server-lambda'
+import merge from 'lodash/merge'
+import { noteTypeDefs, noteResolvers } from 'note/note-graphql'
 
-const { DB_URL } = process.env
-
-const knex = Knex({
-  client: 'pg',
-  connection: DB_URL,
-  searchPath: ['knex', 'public'],
-})
-
-const typeDefs = gql`
-  type Note {
-    id: String!
-    userId: String!
-    createdAt: String!
-    updatedAt: String!
-    title: String!
-    description: String
-  }
-
-  type Query {
-    getNote(id: String!, userId: String!): Note
-    getNotes(userId: String!): [Note]
-    # createNote(): Boolean
-    # updateNote(): Note
-    # deleteNote(): Boolean
-  }
-`
-const resolvers = {
-  Query: {
-    getNote: (_, { id, userId }) =>
-      knex('Note')
-        .where({ id, userId })
-        .first(),
-    getNotes: (_, { userId }) => knex('Note').where({ userId }),
-  },
-}
-
-const server = new ApolloServer({ typeDefs, resolvers })
+const server = new ApolloServer({ typeDefs: [noteTypeDefs], resolvers: merge(noteResolvers) })
 
 export const main = server.createHandler()
