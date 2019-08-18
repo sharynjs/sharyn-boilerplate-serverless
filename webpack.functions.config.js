@@ -20,6 +20,5 @@ module.exports = {
     knex: 'commonjs knex',
     'pg-native': 'commonjs pg-native',
   },
-  // mode: slsw.lib.webpack.isLocal ? 'development' : 'production',
   mode: 'production',
 }

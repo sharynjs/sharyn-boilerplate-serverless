@@ -1,10 +1,14 @@
 org: verekia
-app: sharyn-boilerplate-serverless
-service: sharyn-boilerplate-serverless
+app: sharyn-serverless
+service: sharyn-serverless
+
+package:
+  individually: true
 
 provider:
   name: aws
   runtime: nodejs10.x
+  stage: prod
 
 plugins:
   - serverless-offline
@@ -13,6 +17,10 @@ plugins:
 custom:
   webpack:
     config: webpack.functions.config.js
+    includeModules:
+      forceInclude:
+        - knex
+        - pg
 
 functions:
   graphql:

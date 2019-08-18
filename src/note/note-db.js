@@ -1,27 +1,21 @@
 // @flow
 
-import Knex from 'knex'
+// flow-disable-next-line
+import { getGlobal } from '@sharyn/util/global'
 import uuid from 'uuid/v4'
-
-const { DB_URL } = process.env
-
-const knex = Knex({
-  client: 'pg',
-  connection: DB_URL,
-  searchPath: ['knex', 'public'],
-})
 
 const NOTE_TABLE = 'Note'
 
 export const getNote = ({ userId, id }: { userId: string, id: string }) =>
-  knex(NOTE_TABLE)
+  getGlobal('knex')(NOTE_TABLE)
     .where({ userId, id })
     .first()
 
-export const getNotes = ({ userId }: { userId: string }) => knex(NOTE_TABLE).where({ userId })
+export const getNotes = ({ userId }: { userId: string }) =>
+  getGlobal('knex')(NOTE_TABLE).where({ userId })
 
 export const createNote = async ({ userId, input }: { userId: string, input: Object }) => {
-  const queryResult = await knex(NOTE_TABLE).insert({
+  const queryResult = await getGlobal('knex')(NOTE_TABLE).insert({
     userId,
     id: uuid(),
     ...input,
@@ -38,14 +32,14 @@ export const updateNote = async ({
   id: string,
   input: Object,
 }) => {
-  const queryResult = await knex(NOTE_TABLE)
+  const queryResult = await getGlobal('knex')(NOTE_TABLE)
     .where({ userId, id })
-    .update({ ...input, updatedAt: knex.fn.now() })
+    .update({ ...input, updatedAt: getGlobal('knex').fn.now() })
   return queryResult === 1
 }
 
 export const deleteNote = async ({ userId, id }: { userId: string, id: string }) => {
-  const queryResult = await knex(NOTE_TABLE)
+  const queryResult = await getGlobal('knex')(NOTE_TABLE)
     .where({ userId, id })
     .del()
   return queryResult === 1

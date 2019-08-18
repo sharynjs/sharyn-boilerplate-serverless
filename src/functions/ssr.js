@@ -1,5 +1,6 @@
 // @flow
 
+import 'dotenv/config'
 import 'core-js/stable'
 import 'regenerator-runtime/runtime'
 
@@ -17,14 +18,14 @@ const createHtml = (body: string) => `<!doctype html>
 </html>
 `
 
-export const getNote = middy(async ({ pathParameters }) => ({
+export const getNote = middy(async event => ({
   statusCode: 200,
   headers: { 'content-type': 'text/html' },
-  body: createHtml(NotePage(await getNoteCall(pathParameters.id))),
+  body: createHtml(NotePage(await getNoteCall(event))),
 })).use(cors())
 
-export const getNotes = middy(async () => ({
+export const getNotes = middy(async event => ({
   statusCode: 200,
   headers: { 'content-type': 'text/html' },
-  body: createHtml(NotesPage(await getNotesCall())),
+  body: createHtml(NotesPage(await getNotesCall(event))),
 })).use(cors())
