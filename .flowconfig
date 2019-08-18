@@ -10,3 +10,4 @@ esproposal.optional_chaining=enable
 .*/node_modules/eslint-plugin-jsx-a11y/__mocks__/.*
 .*/node_modules/@sharyn/util/.*
 .*/node_modules/@webassemblyjs/ieee754/.*
+.*/node_modules/ncjsm/.*

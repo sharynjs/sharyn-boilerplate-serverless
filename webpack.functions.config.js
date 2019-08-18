@@ -18,6 +18,7 @@ module.exports = {
     bufferutil: 'commonjs bufferutil',
     'utf-8-validate': 'commonjs utf-8-validate',
     knex: 'commonjs knex',
+    express: 'commonjs express',
     'pg-native': 'commonjs pg-native',
   },
   mode: 'production',

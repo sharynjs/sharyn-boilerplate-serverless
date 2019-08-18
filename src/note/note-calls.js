@@ -1,26 +1,10 @@
 // @flow
 
-import axios from 'axios'
-
+import { graphqlCall } from '_shared/util'
 import { getNotesQuery, getNoteQuery } from 'note/note-queries'
 
-const graphqlCall = (
-  { isOffline, requestContext }: { isOffline: boolean, requestContext: Object },
-  { params, data, ...rest }: { params?: Object, data?: Object },
-) =>
-  axios({
-    method: data ? 'post' : 'get',
-    baseURL: isOffline
-      ? 'http://localhost:3000'
-      : `https://${requestContext.domainName}/${requestContext.stage}`,
-    url: '/graphql',
-    params,
-    data,
-    ...rest,
-  })
-
-export const getNotesCall = async (event: Object) => {
-  const { data } = await graphqlCall(event, {
+export const getNotesCall = async () => {
+  const { data } = await graphqlCall({
     params: {
       query: getNotesQuery,
       variables: { userId: 'auth0|5d57c4d1970c780e706b54d3' },
@@ -29,11 +13,11 @@ export const getNotesCall = async (event: Object) => {
   return data.data.getNotes
 }
 
-export const getNoteCall = async (event: Object) => {
-  const { data } = await graphqlCall(event, {
+export const getNoteCall = async (id: string) => {
+  const { data } = await graphqlCall({
     params: {
       query: getNoteQuery,
-      variables: { userId: 'auth0|5d57c4d1970c780e706b54d3', id: event.pathParameters.id },
+      variables: { userId: 'auth0|5d57c4d1970c780e706b54d3', id },
     },
   })
   return data.data.getNote
