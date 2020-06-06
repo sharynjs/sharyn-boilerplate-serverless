@@ -22,7 +22,7 @@
   "prettier": "@sharyn/prettier",
   "dependencies": {
     "@sharyn/util": "2.5.0",
-    "apollo-server-lambda": "2.8.1",
+    "apollo-server-lambda": "2.14.2",
     "aws-serverless-express": "3.3.6",
     "axios": "0.19.0",
     "core-js": "3.2.1",
